@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Fitness Tracker</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <script>
+    // Redirect if not logged in
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>Welcome, <span id="user-display"></span>!</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </header>
+
+    <!-- Overview Orange and Blue Card -->
+    <section class="overview-cards">
+      <div class="overview-card nutrition-card">
+        <div class="icon"><img src="https://img.icons8.com/ios/50/fire-element.png" alt="Calories Icon" /></div>
+        <div class="overview-content">
+          <h2>Calories Intake</h2>
+          <p id="nutrition-calories">0 kcal</p>
+        </div>
+      </div>
+
+      <div class="overview-card workout-card">
+        <div class="icon"><img src="https://img.icons8.com/ios/50/dumbbell.png" alt="Workout Icon" /></div>
+        <div class="overview-content">
+          <h2>Calories Burned</h2>
+          <p id="workout-calories">0 kcal</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Profile -->
+    <section class="card profile-card">
+      <h2>User Profile</h2>
+      <input type="text" id="name" placeholder="Name" />
+      <input type="number" id="age" placeholder="Age" />
+      <input type="number" id="weight" placeholder="Weight (kg)" />
+      <input type="number" id="height" placeholder="Height (cm)" />
+      <button onclick="saveProfile()">Save Profile</button>
+    </section>
+
+    <!-- Workout Log -->
+    <section class="card workout-log-card">
+      <h2>Workout Log</h2>
+      <form id="workout-form">
+        <input type="text" id="workout-name" placeholder="Workout Name" required />
+        <input type="number" id="calories-burned" placeholder="Calories Burned" required min="1" />
+        <button type="submit">Add Workout</button>
+      </form>
+      <ul id="workouts"></ul>
+    </section>
+
+    <!-- Nutrition Log -->
+    <section class="card nutrition-log-card">
+      <h2>Nutrition</h2>
+      <form id="meal-form">
+        <input type="text" id="food-item" placeholder="Food Item" required />
+        <input type="number" id="calories-intake" placeholder="Calories" required />
+        <button type="submit">Add Meal</button>
+      </form>
+      <ul id="meals"></ul>
+    </section>
+
+    <!-- Progress Chart -->
+    <section class="card chart-card">
+      <h2>Progress Chart</h2>
+      <canvas id="caloriesChart"></canvas>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
